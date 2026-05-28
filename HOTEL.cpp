@@ -144,21 +144,27 @@ void freserva()
 		scanf("%d %d", &andar, &apto);
 		fclear();
 		
-		printf("Digite seu CPF: ");
-		scanf("%s", &hospede[andar][apto].cpf);
-		fclear();
-		printf("\n");
-		//NAO AVISA QUANDO TA RESERVADO
-		
 		// validar limites
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
 		{
 			printf("Coordenada invalida!\n");
 			break;
 		}
-	
-		mat[andar-1][apto-1] = 'R';
-		fmostrarmapa();
+				
+		//sobrescrevendo!!!!!
+		if((mat[andar - 1][apto - 1] != 'O') && (mat[andar - 1][apto - 1] != 'R'))
+		{
+			printf("Digite seu CPF: ");
+			scanf("%s", &hospede[andar][apto].cpf);
+			fclear();
+			printf("\n");
+			mat[andar-1][apto-1] = 'R';
+			fmostrarmapa();
+		}
+		else
+		{
+			printf("\nQuarto indisponivel!\n");
+		}
 		
 		//FIX: CHECAGEM DE NUMERO INVALIDO
 		printf("\nGostaria de fazer outra reserva?\n");
