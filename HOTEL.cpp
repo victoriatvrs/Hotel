@@ -33,9 +33,24 @@ void fcheckin();
 //variaveis globais
 char mat[20][14];
 int i, j;
-struct stdados{
-	//matriz 20x14 p guardar dados
+char dados[20][14]; //apenas pra guardar dados
+
+typedef struct stendereco{
+	char ender[40];
+	char munic[20];
+	char estado[3];
+	char cep[10];
 };
+
+typedef struct stdados{
+	char cpf[11];
+	char nome[50];
+	struct stendereco endereco;
+	char tel[15];
+	char email[30]; 
+};
+
+struct stdados hospede;
 
 int main()
 {
@@ -114,6 +129,10 @@ void freserva()
 		printf("\nDigite o numero do andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		
+		printf("Digite seu CPF: ");
+		gets(hospede.cpf);
+		dados[andar][apto] = hospede.cpf;
+		
 		// validar limites
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
 		{
@@ -135,13 +154,46 @@ void freserva()
 
 void fcheckin()
 {
-	int reserva;
+	int reserva, vazio;
+	int andar, apto;
+	
 	printf("Possui reserva?\n");
 	printf("1 - Sim\n");
 	printf("2 - Nao\n");
 	scanf("%d", &reserva);
 	if(reserva == 1)
 	{
-		printf("Digite seus dados: ");
+		printf("Digite o andar e apartamento: ");
+		scanf("%d %d", &andar, &apto);
+		
+		printf("\n\nDigite seu cpf: ");
+		gets(hospede.cpf);
+		if(hospede.cpf == dados[andar][apto])
+		{
+			printf("\nCheck-in confirmado!");
+			mat[andar][apto] == 'O';
+		}
+		else
+		{
+			printf("\nCadastro invalido! O quarto esta reservado.");
+			printf("Gostaria de fazer check-in em um quarto vazio?\n");
+			printf("1 - Sim\n");
+			printf("2 - Nao\n");
+			scanf("%d", &vazio);
+			if(vazio == 1)
+			{
+				//LIMPAR O BUFFER DO TECLADO
+				printf("\nDigite o numero do andar e apartamento: ");
+				scanf("%d %d", &andar, &apto);
+				if(mat[andar][apto] == 'R')
+				{
+					printf("Quarto resservado!");
+				}
+				else
+				{
+					mat[andar][apto] = 'O';
+				}
+			}
+		}
 	}
 }
