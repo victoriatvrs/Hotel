@@ -29,11 +29,11 @@ void fcriarmapa();
 void fmostrarmapa();
 void freserva();
 void fcheckin();
+void fcheckout();
 
 //variaveis globais
 char mat[20][14];
 int i, j;
-char dados[20][14]; //apenas pra guardar dados
 
 typedef struct stendereco{
 	char ender[40];
@@ -50,7 +50,7 @@ typedef struct stdados{
 	char email[30]; 
 };
 
-struct stdados hospede;
+struct stdados hospede[20][14];
 
 int main()
 {
@@ -71,10 +71,10 @@ int main()
 		switch(op){
 			case 1:
 				freserva();
-		//	case 2:
-				//fcheckin();
-		//	case 3:
-				//fcheckout();
+			case 2:
+				fcheckin();
+			case 3:
+				fcheckout();
 		//	case 4:
 				//cancreserva();
 		//	case 5:
@@ -130,8 +130,7 @@ void freserva()
 		scanf("%d %d", &andar, &apto);
 		
 		printf("Digite seu CPF: ");
-		gets(hospede.cpf);
-		dados[andar][apto] = hospede.cpf;
+		gets(hospede[andar][apto].cpf);
 		
 		// validar limites
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
@@ -156,6 +155,7 @@ void fcheckin()
 {
 	int reserva, vazio;
 	int andar, apto;
+	char checagem[11]; //apenas para checar se o cpf bate com a reserva
 	
 	printf("Possui reserva?\n");
 	printf("1 - Sim\n");
@@ -167,15 +167,30 @@ void fcheckin()
 		scanf("%d %d", &andar, &apto);
 		
 		printf("\n\nDigite seu cpf: ");
-		gets(hospede.cpf);
-		if(hospede.cpf == dados[andar][apto])
+		gets(checagem);
+		if(checagem == hospede[andar][apto].cpf)
 		{
-			printf("\nCheck-in confirmado!");
+			printf("\nCheck-in confirmado! Prossiga com seus dados.");
+			printf("\nNome: ");
+			gets(hospede[andar][apto].nome);
+			printf("\nTelefone: ");
+			gets(hospede[andar][apto].tel);
+			printf("\nEmail: ");
+			gets(hospede[andar][apto].email);
+			printf("\nEndereco: ");
+			gets(hospede[andar][apto].endereco.ender);
+			printf("\nMunicipio: ");
+			gets(hospede[andar][apto].endereco.munic);
+			printf("\nEstado: ");
+			gets(hospede[andar][apto].endereco.estado);
+			printf("\nCEP: ");
+			gets(hospede[andar][apto].endereco.cep);
+			
 			mat[andar][apto] == 'O';
 		}
 		else
 		{
-			printf("\nCadastro invalido! O quarto esta reservado.");
+			printf("\nCadastro invalido! O quarto esta reservado.\n");
 			printf("Gostaria de fazer check-in em um quarto vazio?\n");
 			printf("1 - Sim\n");
 			printf("2 - Nao\n");
@@ -187,7 +202,7 @@ void fcheckin()
 				scanf("%d %d", &andar, &apto);
 				if(mat[andar][apto] == 'R')
 				{
-					printf("Quarto resservado!");
+					printf("Quarto nao disponivel.");
 				}
 				else
 				{
@@ -196,4 +211,41 @@ void fcheckin()
 			}
 		}
 	}
+	else
+	{
+		printf("Digite o andar e apartamento: ");
+		scanf("%d %d", &andar, &apto);
+		
+		//LIMPAR O BUFFER DO TECLADO
+		
+		printf("\nProssiga com seus dados.");
+		printf("\nNome: ");
+		gets(hospede[andar][apto].nome);
+		printf("\nTelefone: ");
+		gets(hospede[andar][apto].tel);
+		printf("\nEmail: ");
+		gets(hospede[andar][apto].email);
+		printf("\nEndereco: ");
+		gets(hospede[andar][apto].endereco.ender);
+		printf("\nMunicipio: ");
+		gets(hospede[andar][apto].endereco.munic);
+		printf("\nEstado: ");
+		gets(hospede[andar][apto].endereco.estado);
+		printf("\nCEP: ");
+		gets(hospede[andar][apto].endereco.cep);
+		
+		mat[andar][apto] == 'O';
+	}
+}
+
+void fcheckout()
+{
+	int andar, apto;
+	
+	printf("Digite o andar e apartamento: ");
+	scanf("%d %d", &andar, &apto);
+	
+	mat[andar][apto] = '.';
+	printf("\n\nQuarto liberado!\n\n");
+	fmostrarmapa();
 }
