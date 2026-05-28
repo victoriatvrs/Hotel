@@ -29,7 +29,10 @@ void fcriarmapa();
 void fmostrarmapa();
 void freserva();
 void fcheckin();
+void fclear();
 void fcheckout();
+//void fcancela();
+void fclear();
 
 //variaveis globais
 char mat[20][14];
@@ -40,7 +43,7 @@ typedef struct stendereco{
 	char munic[20];
 	char estado[3];
 	char cep[10];
-};
+}stendereco;
 
 typedef struct stdados{
 	char cpf[11];
@@ -48,7 +51,7 @@ typedef struct stdados{
 	struct stendereco endereco;
 	char tel[15];
 	char email[30]; 
-};
+}stdados;
 
 struct stdados hospede[20][14];
 
@@ -65,8 +68,11 @@ int main()
 		printf("3. Fazer check-out\n");
 		printf("4. Cancelar reserva\n");
 		printf("5. Modo administrador\n");
+		
+		
 		printf("Digite uma opcao: ");
 		scanf("%d", &op);
+		fclear();
 		
 		switch(op){
 			case 1:
@@ -76,11 +82,17 @@ int main()
 			case 3:
 				fcheckout();
 		//	case 4:
-				//cancreserva();
+				//fcancreserva();
 		//	case 5:
 				// modo de administrador p taxas e verificar info do cliente
 		}
 	}while((op > 5)  || (op > 1));
+}
+
+void fclear()
+{
+	char car;
+	while ((car = fgetc(stdin)) != EOF && car != '\n'){}
 }
 
 void fcriarmapa()
@@ -129,8 +141,11 @@ void freserva()
 		printf("\nDigite o numero do andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		
+		fclear();
+		
 		printf("Digite seu CPF: ");
 		gets(hospede[andar][apto].cpf);
+		fclear();
 		
 		// validar limites
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
@@ -147,6 +162,7 @@ void freserva()
 		printf("1 - Sim\n");
 		printf("2 - Nao\n");
 		scanf("%d", &repeat);
+		fclear();
 		
 	}while(repeat == 1);
 }
@@ -161,30 +177,41 @@ void fcheckin()
 	printf("1 - Sim\n");
 	printf("2 - Nao\n");
 	scanf("%d", &reserva);
+	fclear();
 	if(reserva == 1)
 	{
 		printf("Digite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
+		fclear();
 		
 		printf("\n\nDigite seu cpf: ");
 		gets(checagem);
+		fclear();
+		
 		if(checagem == hospede[andar][apto].cpf)
 		{
 			printf("\nCheck-in confirmado! Prossiga com seus dados.");
 			printf("\nNome: ");
 			gets(hospede[andar][apto].nome);
+			fclear();
 			printf("\nTelefone: ");
 			gets(hospede[andar][apto].tel);
+			fclear();
 			printf("\nEmail: ");
 			gets(hospede[andar][apto].email);
+			fclear();
 			printf("\nEndereco: ");
 			gets(hospede[andar][apto].endereco.ender);
+			fclear();
 			printf("\nMunicipio: ");
 			gets(hospede[andar][apto].endereco.munic);
+			fclear();
 			printf("\nEstado: ");
 			gets(hospede[andar][apto].endereco.estado);
+			fclear();
 			printf("\nCEP: ");
 			gets(hospede[andar][apto].endereco.cep);
+			fclear();
 			
 			mat[andar][apto] == 'O';
 		}
@@ -195,11 +222,13 @@ void fcheckin()
 			printf("1 - Sim\n");
 			printf("2 - Nao\n");
 			scanf("%d", &vazio);
+			fclear();
+			
 			if(vazio == 1)
 			{
-				//LIMPAR O BUFFER DO TECLADO
 				printf("\nDigite o numero do andar e apartamento: ");
 				scanf("%d %d", &andar, &apto);
+				fclear();
 				if(mat[andar][apto] == 'R')
 				{
 					printf("Quarto nao disponivel.");
@@ -211,32 +240,39 @@ void fcheckin()
 			}
 		}
 	}
+	
 	else
 	{
 		printf("Digite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
-		
-		//LIMPAR O BUFFER DO TECLADO
-		
+		fclear();
 		printf("\nProssiga com seus dados.");
 		printf("\nNome: ");
 		gets(hospede[andar][apto].nome);
+		fclear();
 		printf("\nTelefone: ");
 		gets(hospede[andar][apto].tel);
+		fclear();
 		printf("\nEmail: ");
 		gets(hospede[andar][apto].email);
+		fclear();
 		printf("\nEndereco: ");
 		gets(hospede[andar][apto].endereco.ender);
+		fclear();
 		printf("\nMunicipio: ");
 		gets(hospede[andar][apto].endereco.munic);
+		fclear();
 		printf("\nEstado: ");
 		gets(hospede[andar][apto].endereco.estado);
+		fclear();
 		printf("\nCEP: ");
 		gets(hospede[andar][apto].endereco.cep);
+		fclear();
 		
 		mat[andar][apto] == 'O';
 	}
 }
+
 
 void fcheckout()
 {
@@ -244,6 +280,7 @@ void fcheckout()
 	
 	printf("Digite o andar e apartamento: ");
 	scanf("%d %d", &andar, &apto);
+	fclear();
 	
 	mat[andar][apto] = '.';
 	printf("\n\nQuarto liberado!\n\n");
