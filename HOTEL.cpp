@@ -69,7 +69,6 @@ int main()
 		printf("4. Cancelar reserva\n");
 		printf("5. Modo administrador\n");
 		
-		
 		printf("Digite uma opcao: ");
 		scanf("%d", &op);
 		fclear();
@@ -77,16 +76,19 @@ int main()
 		switch(op){
 			case 1:
 				freserva();
+				break;
 			case 2:
 				fcheckin();
+				break;
 			case 3:
 				fcheckout();
+				break;
 		//	case 4:
 				//fcancreserva();
 		//	case 5:
 				// modo de administrador p taxas e verificar info do cliente
 		}
-	}while((op > 5)  || (op > 1));
+	}while(1);
 }
 
 void fclear()
@@ -140,12 +142,13 @@ void freserva()
 		// pedir coordenadas
 		printf("\nDigite o numero do andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
-		
 		fclear();
 		
 		printf("Digite seu CPF: ");
-		gets(hospede[andar][apto].cpf);
+		scanf("%s", &hospede[andar][apto].cpf);
 		fclear();
+		printf("\n");
+		//NAO AVISA QUANDO TA RESERVADO
 		
 		// validar limites
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
