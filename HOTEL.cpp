@@ -151,11 +151,10 @@ void freserva()
 			break;
 		}
 				
-		//sobrescrevendo!!!!!
 		if((mat[andar - 1][apto - 1] != 'O') && (mat[andar - 1][apto - 1] != 'R'))
 		{
 			printf("Digite seu CPF: ");
-			scanf("%s", &hospede[andar][apto].cpf);
+			scanf("%s", &hospede[andar-1][apto-1].cpf);
 			fclear();
 			printf("\n");
 			mat[andar-1][apto-1] = 'R';
@@ -194,35 +193,35 @@ void fcheckin()
 		fclear();
 		
 		printf("\n\nDigite seu cpf: ");
-		gets(checagem);
+		scanf("%s", &checagem);
 		fclear();
 		
-		if(checagem == hospede[andar][apto].cpf)
+		if(checagem == hospede[andar - 1][apto - 1].cpf)
 		{
 			printf("\nCheck-in confirmado! Prossiga com seus dados.");
 			printf("\nNome: ");
-			gets(hospede[andar][apto].nome);
+			gets(hospede[andar - 1][apto - 1].nome);
 			fclear();
 			printf("\nTelefone: ");
-			gets(hospede[andar][apto].tel);
+			gets(hospede[andar - 1][apto - 1].tel);
 			fclear();
 			printf("\nEmail: ");
-			gets(hospede[andar][apto].email);
+			gets(hospede[andar - 1][apto - 1].email);
 			fclear();
 			printf("\nEndereco: ");
-			gets(hospede[andar][apto].endereco.ender);
+			gets(hospede[andar - 1][apto - 1].endereco.ender);
 			fclear();
 			printf("\nMunicipio: ");
-			gets(hospede[andar][apto].endereco.munic);
+			gets(hospede[andar - 1][apto - 1].endereco.munic);
 			fclear();
 			printf("\nEstado: ");
-			gets(hospede[andar][apto].endereco.estado);
+			gets(hospede[andar - 1][apto - 1].endereco.estado);
 			fclear();
 			printf("\nCEP: ");
-			gets(hospede[andar][apto].endereco.cep);
+			gets(hospede[andar - 1][apto - 1].endereco.cep);
 			fclear();
 			
-			mat[andar][apto] == 'O';
+			mat[andar - 1][apto - 1] == 'O';
 		}
 		else
 		{
@@ -238,13 +237,13 @@ void fcheckin()
 				printf("\nDigite o numero do andar e apartamento: ");
 				scanf("%d %d", &andar, &apto);
 				fclear();
-				if(mat[andar][apto] == 'R')
+				if(mat[andar-1][apto-1] == 'R')
 				{
 					printf("Quarto nao disponivel.");
 				}
 				else
 				{
-					mat[andar][apto] = 'O';
+					mat[andar-1][apto-1] = 'O';
 				}
 			}
 		}
