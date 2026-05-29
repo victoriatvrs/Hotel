@@ -24,6 +24,8 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <string.h>
+
 //prototipo das funcoes
 void fcriarmapa();
 void fmostrarmapa();
@@ -31,7 +33,7 @@ void freserva();
 void fcheckin();
 void fclear();
 void fcheckout();
-//void fcancela();
+//void fcancreserva();
 void fclear();
 
 //variaveis globais
@@ -193,10 +195,10 @@ void fcheckin()
 		fclear();
 		
 		printf("\n\nDigite seu cpf: ");
-		scanf("%s", &checagem);
+		scanf("%11s", &checagem);
 		fclear();
 		
-		if(checagem == hospede[andar - 1][apto - 1].cpf)
+		if(strcmp(checagem, hospede[andar - 1][apto - 1].cpf) == 0)
 		{
 			printf("\nCheck-in confirmado! Prossiga com seus dados.");
 			printf("\nNome: ");
