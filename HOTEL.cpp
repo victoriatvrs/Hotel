@@ -205,6 +205,7 @@ void fcheckin()
 			printf("\nNome: ");
 			gets(hospede[andar - 1][apto - 1].nome);
 			fclear();
+			//ENTER????
 			printf("\nTelefone: ");
 			gets(hospede[andar - 1][apto - 1].tel);
 			fclear();
@@ -300,6 +301,7 @@ void fcheckout()
 void fcancreserva()
 {
 	int andar, apto;
+	char checagem[11];
 	
 		// pedir coordenadas
 		printf("\nDigite o numero do andar e apartamento: ");
@@ -312,18 +314,24 @@ void fcancreserva()
 			printf("Coordenada invalida!\n");
 		}
 		
-		//AJUSTAR LOGICA
 		if(mat[andar - 1][apto - 1] == 'R')
 		{
 			printf("Digite seu CPF para confirmar: ");
-			scanf("%s", &hospede[andar-1][apto-1].cpf);
+			scanf("%11s", &checagem);
 			fclear();
 			printf("\n");
-			mat[andar-1][apto-1] = '.';
-			fmostrarmapa();
-		}
-		else
-		{
-			printf("\nNao foi possivel cancelar. Verifique o CPF.\n");
+		
+			if(strcmp(checagem, hospede[andar - 1][apto - 1].cpf) == 0)
+			{
+				//ENTER????
+				fclear();
+				printf("\nReserva cancelada. \n");
+				mat[andar-1][apto-1] = '.';
+				fmostrarmapa();
+			}
+			else
+			{
+				printf("\nNao foi possivel cancelar. Verifique o CPF.\n");
+			}
 		}
 }
