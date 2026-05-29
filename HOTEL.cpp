@@ -173,6 +173,11 @@ void freserva()
 		printf("1 - Sim\n");
 		printf("2 - Nao\n");
 		scanf("%d", &repeat);
+		if(repeat != 1 && repeat != 2)
+		{
+			printf("\nNumero invalido!");
+			break;
+		}
 		fclear();
 		
 	}while(repeat == 1);
