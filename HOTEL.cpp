@@ -33,7 +33,7 @@ void freserva();
 void fcheckin();
 void fclear();
 void fcheckout();
-//void fcancreserva();
+void fcancreserva();
 void fclear();
 
 //variaveis globais
@@ -85,8 +85,9 @@ int main()
 			case 3:
 				fcheckout();
 				break;
-		//	case 4:
-				//fcancreserva();
+			case 4:
+				fcancreserva();
+				break;
 		//	case 5:
 				// modo de administrador p taxas e verificar info do cliente
 		}
@@ -283,7 +284,6 @@ void fcheckin()
 	}
 }
 
-
 void fcheckout()
 {
 	int andar, apto;
@@ -295,4 +295,35 @@ void fcheckout()
 	mat[andar][apto] = '.';
 	printf("\n\nQuarto liberado!\n\n");
 	fmostrarmapa();
+}
+
+void fcancreserva()
+{
+	int andar, apto;
+	
+		// pedir coordenadas
+		printf("\nDigite o numero do andar e apartamento: ");
+		scanf("%d %d", &andar, &apto);
+		fclear();
+		
+		// validar limites
+		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
+		{
+			printf("Coordenada invalida!\n");
+		}
+		
+		//AJUSTAR LOGICA
+		if(mat[andar - 1][apto - 1] == 'R')
+		{
+			printf("Digite seu CPF para confirmar: ");
+			scanf("%s", &hospede[andar-1][apto-1].cpf);
+			fclear();
+			printf("\n");
+			mat[andar-1][apto-1] = '.';
+			fmostrarmapa();
+		}
+		else
+		{
+			printf("\nNao foi possivel cancelar. Verifique o CPF.\n");
+		}
 }
