@@ -1,4 +1,3 @@
-//menu
 
 //ATV4
 //mapa geral - 20 andares e 14 aptos
@@ -25,6 +24,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string.h>
+#include <stdlib.h>
 
 //prototipo das funcoes
 void fcriarmapa();
@@ -62,15 +62,18 @@ int main()
 	int op;
 	
 	fcriarmapa(); //tem que ser no main pra nao resetar
-	fmostrarmapa();
 	
 	do{
-		printf("\n1. Fazer reserva\n");
-		printf("2. Fazer check-in\n");
-		printf("3. Fazer check-out\n");
-		printf("4. Cancelar reserva\n");
-		printf("5. Modo administrador\n");
-		
+		system("cls");
+		fmostrarmapa();
+	
+		printf("\n[1] Fazer reserva\n");
+		printf("[2] Fazer check-in\n");
+		printf("[3] Fazer check-out\n");
+		printf("[4] Cancelar reserva\n");
+		printf("[5] Modo administrador\n");
+
+		printf("-----------------------\n");
 		printf("Digite uma opcao: ");
 		scanf("%d", &op);
 		fclear();
@@ -142,6 +145,9 @@ void freserva()
 	int repeat;
 	
 	do{
+		system("cls");		
+		fmostrarmapa();
+
 		// pedir coordenadas
 		printf("\nDigite o numero do andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
@@ -161,6 +167,7 @@ void freserva()
 			fclear();
 			printf("\n");
 			mat[andar-1][apto-1] = 'R';
+			system("cls");
 			fmostrarmapa();
 		}
 		else
@@ -169,8 +176,10 @@ void freserva()
 		}
 		
 		printf("\nGostaria de fazer outra reserva?\n");
-		printf("1 - Sim\n");
-		printf("2 - Nao\n");
+		printf("[1] Sim\n");
+		printf("[2] Nao\n");
+		printf("---------------------------------\n");
+		printf("Digite uma opcao: ");
 		scanf("%d", &repeat);
 		if(repeat != 1 && repeat != 2)
 		{
@@ -188,24 +197,32 @@ void fcheckin()
 	int andar, apto;
 	char checagem[11]; //apenas para checar se o cpf bate com a reserva
 	
-	printf("Possui reserva?\n");
-	printf("1 - Sim\n");
-	printf("2 - Nao\n");
+	system("cls");
+	fmostrarmapa();
+	printf("\nPossui reserva?\n");
+	printf("[1] Sim\n");
+	printf("[2] Nao\n");
+	printf("------------------\n");
+	printf("Digite uma opcao: ");
 	scanf("%d", &reserva);
 	fclear();
+	
 	if(reserva == 1)
 	{
-		printf("Digite o andar e apartamento: ");
+		system("cls");
+		fmostrarmapa();
+		printf("\nDigite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		fclear();
 		
-		printf("\n\nDigite seu cpf: ");
+		printf("\nDigite seu cpf: ");
 		scanf("%11s", &checagem);
 		fclear();
 		
 		if(strcmp(checagem, hospede[andar - 1][apto - 1].cpf) == 0)
 		{
-			printf("\nCheck-in confirmado! Prossiga com seus dados.");
+			printf("-----------------------------------------------");
+			printf("\nCheck-in confirmado! Prossiga com seus dados.\n");
 			
 			printf("\nNome: ");
 			scanf("%s", &hospede[andar - 1][apto - 1].nome);
@@ -236,30 +253,65 @@ void fcheckin()
 			fclear();
 			
 			mat[andar - 1][apto - 1] = 'O';
-			
-			fmostrarmapa();
 		}
 		else
 		{
 			printf("\nCadastro invalido! O quarto esta reservado.\n");
+			printf("------------------------------------------------\n");
 			printf("Gostaria de fazer check-in em um quarto vazio?\n");
-			printf("1 - Sim\n");
-			printf("2 - Nao\n");
+			printf("[1] Sim\n");
+			printf("[2] Nao\n");
+			printf("-------------------\n");
+			printf("Digite uma opcao: ");
 			scanf("%d", &vazio);
 			fclear();
 			
 			if(vazio == 1)
 			{
+				system("cls");
+				fmostrarmapa();
 				printf("\nDigite o numero do andar e apartamento: ");
 				scanf("%d %d", &andar, &apto);
 				fclear();
 				if(mat[andar-1][apto-1] == 'R')
 				{
-					printf("Quarto nao disponivel.");
-					fmostrarmapa();
+					printf("\nQuarto nao disponivel.\n");
+					printf("----------------------\n\n");
+					system("pause");
 				}
 				else
 				{
+					printf("\nProssiga com seus dados.");
+					printf("\n-------------------------");
+					
+					printf("\nNome: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].nome);
+					fclear();
+					
+					printf("\nTelefone: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].tel);
+					fclear();
+					
+					printf("\nEmail: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].email);
+					fclear();
+					
+					printf("\nEndereco: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].endereco.ender);
+					fclear();
+				
+					printf("\nMunicipio: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].endereco.munic);
+					fclear();
+					
+					printf("\nEstado: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].endereco.estado);
+					fclear();
+				
+					printf("\nCEP: ");
+					scanf("%s", &hospede[andar - 1][apto - 1].endereco.cep);
+					fclear();
+					
 					mat[andar-1][apto-1] = 'O';
 					fmostrarmapa();
 				}
@@ -268,11 +320,14 @@ void fcheckin()
 	}
 	else
 	{
-		printf("Digite o andar e apartamento: ");
+		system("cls");
+		fmostrarmapa();
+		printf("\nDigite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		fclear();
 		
-		printf("\nProssiga com seus dados.");
+		printf("----------------------------------");
+		printf("\nProssiga com seus dados.\n");
 		
 		printf("\nNome: ");
 		scanf("%s", &hospede[andar][apto].nome);
@@ -303,7 +358,6 @@ void fcheckin()
 		fclear();
 		
 		mat[andar-1][apto-1] = 'O';
-		fmostrarmapa();
 	}
 }
 
@@ -311,7 +365,9 @@ void fcheckout()
 {
 	int andar, apto;
 	
-	printf("Digite o andar e apartamento: ");
+	system("cls");
+	fmostrarmapa();
+	printf("\nDigite o andar e apartamento: ");
 	scanf("%d %d", &andar, &apto);
 	fclear();
 	
