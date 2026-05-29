@@ -206,27 +206,33 @@ void fcheckin()
 		if(strcmp(checagem, hospede[andar - 1][apto - 1].cpf) == 0)
 		{
 			printf("\nCheck-in confirmado! Prossiga com seus dados.");
+			
 			printf("\nNome: ");
-			gets(hospede[andar - 1][apto - 1].nome);
+			scanf("%s", &hospede[andar - 1][apto - 1].nome);
 			fclear();
-			//ENTER????
+			
 			printf("\nTelefone: ");
-			gets(hospede[andar - 1][apto - 1].tel);
+			scanf("%s", &hospede[andar - 1][apto - 1].tel);
 			fclear();
+			
 			printf("\nEmail: ");
-			gets(hospede[andar - 1][apto - 1].email);
+			scanf("%s", &hospede[andar - 1][apto - 1].email);
 			fclear();
+			
 			printf("\nEndereco: ");
-			gets(hospede[andar - 1][apto - 1].endereco.ender);
+			scanf("%s", &hospede[andar - 1][apto - 1].endereco.ender);
 			fclear();
+			
 			printf("\nMunicipio: ");
-			gets(hospede[andar - 1][apto - 1].endereco.munic);
+			scanf("%s", &hospede[andar - 1][apto - 1].endereco.munic);
 			fclear();
+			
 			printf("\nEstado: ");
-			gets(hospede[andar - 1][apto - 1].endereco.estado);
+			scanf("%s", &hospede[andar - 1][apto - 1].endereco.estado);
 			fclear();
+			
 			printf("\nCEP: ");
-			gets(hospede[andar - 1][apto - 1].endereco.cep);
+			scanf("%s", &hospede[andar - 1][apto - 1].endereco.cep);
 			fclear();
 			
 			mat[andar - 1][apto - 1] = 'O';
@@ -265,27 +271,35 @@ void fcheckin()
 		printf("Digite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		fclear();
+		
 		printf("\nProssiga com seus dados.");
+		
 		printf("\nNome: ");
-		gets(hospede[andar][apto].nome);
+		scanf("%s", &hospede[andar][apto].nome);
 		fclear();
+		
 		printf("\nTelefone: ");
-		gets(hospede[andar][apto].tel);
+		scanf("%s", &hospede[andar][apto].tel);
 		fclear();
+		
 		printf("\nEmail: ");
-		gets(hospede[andar][apto].email);
+		scanf("%s", &hospede[andar][apto].email);
 		fclear();
+		
 		printf("\nEndereco: ");
-		gets(hospede[andar][apto].endereco.ender);
+		scanf("%s", &hospede[andar][apto].endereco.ender);
 		fclear();
+		
 		printf("\nMunicipio: ");
-		gets(hospede[andar][apto].endereco.munic);
+		scanf("%s", &hospede[andar][apto].endereco.munic);
 		fclear();
+		
 		printf("\nEstado: ");
-		gets(hospede[andar][apto].endereco.estado);
+		scanf("%s", &hospede[andar][apto].endereco.estado);
 		fclear();
+		
 		printf("\nCEP: ");
-		gets(hospede[andar][apto].endereco.cep);
+		scanf("%s", &hospede[andar][apto].endereco.cep);
 		fclear();
 		
 		mat[andar-1][apto-1] = 'O';
