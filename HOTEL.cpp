@@ -1,4 +1,3 @@
-
 //ATV4
 //mapa geral - 20 andares e 14 aptos
 //fazer reserva
@@ -330,31 +329,35 @@ void fcheckin()
 		printf("\nProssiga com seus dados.\n");
 		
 		printf("\nNome: ");
-		scanf("%s", &hospede[andar][apto].nome);
+		scanf("%s", &hospede[andar-1][apto-1].nome);
+		fclear();
+		
+		printf("\nCPF: ");
+		scanf("%s", &hospede[andar-1][apto-1].cpf);
 		fclear();
 		
 		printf("\nTelefone: ");
-		scanf("%s", &hospede[andar][apto].tel);
+		scanf("%s", &hospede[andar-1][apto-1].tel);
 		fclear();
 		
 		printf("\nEmail: ");
-		scanf("%s", &hospede[andar][apto].email);
+		scanf("%s", &hospede[andar-1][apto-1].email);
 		fclear();
 		
 		printf("\nEndereco: ");
-		scanf("%s", &hospede[andar][apto].endereco.ender);
+		scanf("%s", &hospede[andar-1][apto-1].endereco.ender);
 		fclear();
 		
 		printf("\nMunicipio: ");
-		scanf("%s", &hospede[andar][apto].endereco.munic);
+		scanf("%s", &hospede[andar-1][apto-1].endereco.munic);
 		fclear();
 		
 		printf("\nEstado: ");
-		scanf("%s", &hospede[andar][apto].endereco.estado);
+		scanf("%s", &hospede[andar-1][apto-1].endereco.estado);
 		fclear();
 		
 		printf("\nCEP: ");
-		scanf("%s", &hospede[andar][apto].endereco.cep);
+		scanf("%s", &hospede[andar-1][apto-1].endereco.cep);
 		fclear();
 		
 		mat[andar-1][apto-1] = 'O';
@@ -364,6 +367,7 @@ void fcheckin()
 void fcheckout()
 {
 	int andar, apto;
+	char checagem[11];
 	
 	system("cls");
 	fmostrarmapa();
@@ -371,9 +375,32 @@ void fcheckout()
 	scanf("%d %d", &andar, &apto);
 	fclear();
 	
-	mat[andar][apto] = '.';
-	printf("\n\nQuarto liberado!\n\n");
-	fmostrarmapa();
+	if(mat[andar - 1][apto - 1] == 'O')
+		{
+			printf("Digite seu CPF para confirmar: ");
+			scanf("%11s", &checagem);
+			fclear();
+			printf("\n");
+		
+			if(strcmp(checagem, hospede[andar - 1][apto - 1].cpf) == 0)
+			{
+				//ENTER????
+				fclear();
+				printf("\n\nQuarto liberado! \n\n");
+				mat[andar-1][apto-1] = '.';
+				fmostrarmapa();
+				system("pause");
+			}
+			else
+			{
+				printf("\nNao foi possivel completar. Verifique o CPF.\n");
+			}
+	}
+	else
+	{
+		printf("O quarto nao esta ocupado. Verifique a digitacao.\n");
+		
+	}
 }
 
 void fcancreserva()
