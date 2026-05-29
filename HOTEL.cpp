@@ -168,7 +168,6 @@ void freserva()
 			printf("\nQuarto indisponivel!\n");
 		}
 		
-		//FIX: CHECAGEM DE NUMERO INVALIDO
 		printf("\nGostaria de fazer outra reserva?\n");
 		printf("1 - Sim\n");
 		printf("2 - Nao\n");
@@ -230,7 +229,9 @@ void fcheckin()
 			gets(hospede[andar - 1][apto - 1].endereco.cep);
 			fclear();
 			
-			mat[andar - 1][apto - 1] == 'O';
+			mat[andar - 1][apto - 1] = 'O';
+			
+			fmostrarmapa();
 		}
 		else
 		{
@@ -249,15 +250,16 @@ void fcheckin()
 				if(mat[andar-1][apto-1] == 'R')
 				{
 					printf("Quarto nao disponivel.");
+					fmostrarmapa();
 				}
 				else
 				{
 					mat[andar-1][apto-1] = 'O';
+					fmostrarmapa();
 				}
 			}
 		}
 	}
-	
 	else
 	{
 		printf("Digite o andar e apartamento: ");
@@ -286,7 +288,8 @@ void fcheckin()
 		gets(hospede[andar][apto].endereco.cep);
 		fclear();
 		
-		mat[andar][apto] == 'O';
+		mat[andar-1][apto-1] = 'O';
+		fmostrarmapa();
 	}
 }
 
