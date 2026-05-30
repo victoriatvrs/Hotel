@@ -253,7 +253,11 @@ void fcheckin()
 			
 			mat[andar - 1][apto - 1] = 'O'; //confirma o check in
 		}
+<<<<<<< HEAD
 		else //cpf nao bate com o da reserva
+=======
+		else //falha no check in em quarto reservado
+>>>>>>> 72227ae8e8a010810a7ed765ae13b4a42f7edd5c
 		{
 			printf("\nCadastro invalido! O quarto esta reservado.\n");
 			printf("------------------------------------------------\n");
@@ -272,13 +276,21 @@ void fcheckin()
 				printf("\nDigite o numero do andar e apartamento: ");
 				scanf("%d %d", &andar, &apto);
 				fclear();
+<<<<<<< HEAD
 				if(mat[andar-1][apto-1] == 'R') //se o quarto estiver reservado ele para
+=======
+				if(mat[andar-1][apto-1] == 'R') //falha no check in em quarto reservado
+>>>>>>> 72227ae8e8a010810a7ed765ae13b4a42f7edd5c
 				{
 					printf("\nQuarto nao disponivel.\n");
 					printf("----------------------\n\n");
 					system("pause");
 				}
+<<<<<<< HEAD
 				else //se o quarto nao estiver reservado, prossegue
+=======
+				else //quarto nao reservado
+>>>>>>> 72227ae8e8a010810a7ed765ae13b4a42f7edd5c
 				{
 					printf("\nProssiga com seus dados.");
 					printf("\n-------------------------");
