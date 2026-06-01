@@ -1,7 +1,7 @@
 //ATV4
-//mapa geral - 20 andares e 14 aptos
-//fazer reserva
-//fazer check in a partir de reserva
+//mapa geral - 20 andares e 14 aptos X
+//fazer reserva X
+//fazer check in a partir de reserva X 
 //fazer check in sem reserva - nunca em um ja reservado
 //fazer check out
 //cancelar uma reserva
@@ -155,7 +155,8 @@ void freserva()
 		// validar limites
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
 		{
-			printf("Coordenada invalida!\n");
+			printf("\nCoordenada invalida!\n\n");
+			system("pause");
 			break;
 		}
 				
@@ -214,6 +215,14 @@ void fcheckin()
 		scanf("%d %d", &andar, &apto);
 		fclear();
 		
+		// validar limites
+		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
+		{
+			printf("\nCoordenada invalida!\n\n");
+			system("pause");
+			return;
+		}
+		
 		printf("\nDigite seu cpf: ");
 		scanf("%11s", &checagem);
 		fclear();
@@ -255,7 +264,7 @@ void fcheckin()
 		}
 		else //cpf nao bate com o da reserva
 		{
-			printf("\nCadastro invalido! O quarto esta reservado.\n");
+			printf("\nCadastro invalido!\n");
 			printf("------------------------------------------------\n");
 			printf("Gostaria de fazer check-in em um quarto vazio?\n");
 			printf("[1] Sim\n");
@@ -272,6 +281,15 @@ void fcheckin()
 				printf("\nDigite o numero do andar e apartamento: ");
 				scanf("%d %d", &andar, &apto);
 				fclear();
+				
+				// validar limites
+				if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
+				{
+					printf("\nCoordenada invalida!\n\n");
+					system("pause");
+					return;
+				}
+		
 				if(mat[andar-1][apto-1] == 'R') //se o quarto estiver reservado ele para
 				{
 					printf("\nQuarto nao disponivel.\n");
@@ -288,7 +306,7 @@ void fcheckin()
 					fclear();
 					
 					printf("\nCPF: ");
-					scanf("%s", &hospede[andar - 1][apto - 1].cpf)
+					scanf("%s", &hospede[andar - 1][apto - 1].cpf);
 					fclear();
 					
 					printf("\nTelefone: ");
@@ -329,10 +347,18 @@ void fcheckin()
 		scanf("%d %d", &andar, &apto);
 		fclear();
 		
+		// validar limites
+		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
+		{
+			printf("\nCoordenada invalida!\n\n");
+			system("pause");
+			return;
+		}
+		
 		if(mat[andar-1][apto-1] == 'R' || mat[andar-1][apto-1] == 'O')
 		{
 			printf("\nImpossivel fazer check-in em um quarto reservado ou ocupado!\n");
-			printf("------------------------------------------------------------\n")
+			printf("------------------------------------------------------------\n");
 			system("pause");
 		}
 		else
@@ -388,6 +414,14 @@ void fcheckout()
 	scanf("%d %d", &andar, &apto);
 	fclear();
 	
+	// validar limites
+	if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
+	{
+		printf("\nCoordenada invalida!\n\n");
+		system("pause");
+		return;
+	}
+	
 	if(mat[andar - 1][apto - 1] == 'O')
 		{
 			printf("Digite seu CPF para confirmar: ");
@@ -434,26 +468,37 @@ void fcancreserva()
 		if(andar < 1 || andar > 20 || apto < 1 || apto > 14)
 		{
 			printf("Coordenada invalida!\n");
+			system("pause");
+			return;
 		}
 		
 		if(mat[andar - 1][apto - 1] == 'R')
 		{
 			printf("Digite seu CPF para confirmar: ");
-			scanf("%11s", &checagem);
+			scanf(" %11s", &checagem);
 			fclear();
 			printf("\n");
 		
 			if(strcmp(checagem, hospede[andar - 1][apto - 1].cpf) == 0)
 			{
-				//ENTER????
-				fclear();
-				printf("\nReserva cancelada. \n");
-				mat[andar-1][apto-1] = '.';
+				system("cls");
 				fmostrarmapa();
+				printf("\nReserva cancelada.\n\n");
+				mat[andar-1][apto-1] = '.';
+				system("pause");
 			}
 			else
 			{
+				system("cls");
 				printf("\nNao foi possivel cancelar. Verifique o CPF.\n");
+				system("pause");
 			}
+		}
+		else
+		{
+			system("cls");
+			fmostrarmapa();
+			printf("\nO quarto nao esta reservado!\n\n");
+			system("pause");
 		}
 }
