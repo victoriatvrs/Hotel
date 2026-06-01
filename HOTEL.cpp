@@ -1,24 +1,14 @@
-//ATV4
-//mapa geral - 20 andares e 14 aptos X
-//fazer reserva X
-//fazer check in a partir de reserva X 
-//fazer check in sem reserva - nunca em um ja reservado
-//fazer check out
-//cancelar uma reserva
-
-//ATV5
-//taxa de ocupacao
-//taxa de reservas
-//cadastrar info do hospede (cpf, nome, endereco, telefone e email)
-//verificar as infos do hospede no apto
-
-//reserva + dados
-//bater check in e reserva
-
-//ATV6
-//apresentacao do projeto
-//entrega da versao final
-//relatorio/documentacao para leigos
+//HSV-Ativ04 
+//30/05/2026
+//Hellen Araujo da Silva
+//Samira Soares Carvalho 
+//Victoria Spina Tavares
+/*Um hotel possui 20 andares com 14 apartamentos por andar.
+Conforme os hospedes vão chegando, eles escolhem o apartamento desejado. 
+Se estiver livre, o apartamento é alocado e o hospede faz o registro. 
+Ao deixar o hotel, o hospede faz o check-out e libera o apartamento. 
+O gerente também precisa saber quais apartamentos estão livres e a taxa de ocupação do hotel.
+*/
 
 #include <stdio.h>
 #include <iostream>
