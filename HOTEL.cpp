@@ -22,6 +22,7 @@ void freserva();
 void fcheckin();
 void fcheckout();
 void fcancreserva();
+void fadmin();
 void fclear();
 
 //variaveis globais
@@ -50,22 +51,25 @@ typedef struct sthotel{
 
 struct sthotel mat[20][14];
 int i, j;
+int ocupados = 0, reservados = 0;
 
 int main()
 {
 	int op;
 	
-	fcriarmapa(); //tem que ser no main pra nao resetar
+	fcriarmapa(); //main pra evitar reset
 	
 	do{
 		system("cls");
 		fmostrarmapa();
 	
+		printf("\n| MENU\n");
 		printf("\n[1] Fazer reserva\n");
 		printf("[2] Fazer check-in\n");
 		printf("[3] Fazer check-out\n");
 		printf("[4] Cancelar reserva\n");
 		printf("[5] Modo administrador\n");
+		printf("[0] Sair\n");
 
 		printf("-----------------------\n");
 		printf("Digite uma opcao: ");
@@ -85,13 +89,16 @@ int main()
 			case 4:
 				fcancreserva();
 				break;
-		//	case 5:
-				// modo de administrador p taxas e verificar info do cliente
+			case 5:
+				fadmin();
+				break;
+			case 0:
+				break;
 		}
-	}while(1);
+	}while(op != 0);
 }
 
-void fclear()
+void fclear() //limpar o buffer do teclado
 {
 	char car;
 	while ((car = fgetc(stdin)) != EOF && car != '\n'){}
@@ -141,6 +148,7 @@ void freserva()
 	do{
 		system("cls");		
 		fmostrarmapa();
+		printf("\n| RESERVA\n");
 
 		// pedir coordenadas
 		printf("\nDigite o numero do andar e apartamento: ");
@@ -154,7 +162,8 @@ void freserva()
 			system("pause");
 			break;
 		}
-				
+			
+		//checa se nao esta ocupado ou reservado	
 		if((mat[andar-1][apto-1].status != 'O') && (mat[andar-1][apto-1].status != 'R'))
 		{
 			printf("Digite seu CPF: ");
@@ -164,6 +173,7 @@ void freserva()
 			mat[andar-1][apto-1].status = 'R';
 			system("cls");
 			fmostrarmapa();
+			printf("\n| RESERVA\n");
 		}
 		else
 		{
@@ -194,6 +204,7 @@ void fcheckin()
 	
 	system("cls");
 	fmostrarmapa();
+	printf("\n| CHECK-IN\n");
 	printf("\nPossui reserva?\n");
 	printf("[1] Sim\n");
 	printf("[2] Nao\n");
@@ -202,10 +213,12 @@ void fcheckin()
 	scanf("%d", &reserva);
 	fclear();
 	
-	if(reserva == 1) //check in em quarto reservado
+	//check in em quarto reservado
+	if(reserva == 1) 
 	{
 		system("cls");
 		fmostrarmapa();
+		printf("\n| CHECK-IN\n");
 		printf("\nDigite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		fclear();
@@ -222,7 +235,9 @@ void fcheckin()
 		scanf("%11s", checagem);
 		fclear();
 		
-		if(strcmp(checagem, mat[andar-1][apto-1].hospede.cpf) == 0) //checa se o cpf bate com o da reserva
+		//checa se o cpf bate com o da reserva
+		if(strcmp(checagem, mat[andar-1][apto-1].hospede.cpf) == 0) 
+		//TA ACEITANDO CHECK IN DUPLO E CPF PASSA
 		{
 			printf("-----------------------------------------------");
 			printf("\nCheck-in confirmado! Prossiga com seus dados.\n");
@@ -273,6 +288,7 @@ void fcheckin()
 			{
 				system("cls");
 				fmostrarmapa();
+				printf("\n| CHECK-IN\n");
 				printf("\nDigite o numero do andar e apartamento: ");
 				scanf("%d %d", &andar, &apto);
 				fclear();
@@ -285,7 +301,7 @@ void fcheckin()
 					return;
 				}
 		
-				if(mat[andar-1][apto-1].status == 'R') //se o quarto estiver reservado ele para
+				if(mat[andar-1][apto-1].status == 'R') //quarto reservado
 				{
 					printf("\nQuarto nao disponivel.\n");
 					printf("----------------------\n\n");
@@ -338,6 +354,7 @@ void fcheckin()
 	{
 		system("cls");
 		fmostrarmapa();
+		printf("\n| CHECK-IN\n");
 		printf("\nDigite o andar e apartamento: ");
 		scanf("%d %d", &andar, &apto);
 		fclear();
@@ -350,6 +367,7 @@ void fcheckin()
 			return;
 		}
 		
+		// nega check in em quarto reservado ou ocupado
 		if(mat[andar-1][apto-1].status == 'R' || mat[andar-1][apto-1].status == 'O')
 		{
 			printf("\nImpossivel fazer check-in em um quarto reservado ou ocupado!\n");
@@ -405,6 +423,7 @@ void fcheckout()
 	
 	system("cls");
 	fmostrarmapa();
+	printf("\n| CHECK-OUT\n");
 	printf("\nDigite o andar e apartamento: ");
 	scanf("%d %d", &andar, &apto);
 	fclear();
@@ -417,6 +436,7 @@ void fcheckout()
 		return;
 	}
 	
+	// so executa com quarto ocupado
 	if(mat[andar-1][apto-1].status == 'O')
 		{
 			printf("Digite seu CPF para confirmar: ");
@@ -427,6 +447,7 @@ void fcheckout()
 			{
 				fclear();
 				system("cls");
+				printf("\n| CHECK-OUT\n");
 				mat[andar-1][apto-1].status = '.';
 				fmostrarmapa();
 				printf("\nQuarto liberado!\n");
@@ -467,6 +488,7 @@ void fcancreserva()
 			return;
 		}
 		
+		//so executa com quarto reservado
 		if(mat[andar-1][apto-1].status == 'R')
 		{
 			printf("Digite seu CPF para confirmar: ");
@@ -478,6 +500,7 @@ void fcancreserva()
 			{
 				system("cls");
 				fmostrarmapa();
+				printf("\n| CANCELAR RESERVA\n");
 				printf("\nReserva cancelada.\n\n");
 				mat[andar-1][apto-1].status = '.';
 				system("pause");
@@ -485,6 +508,8 @@ void fcancreserva()
 			else
 			{
 				system("cls");
+				fmostrarmapa();
+				printf("\n| CANCELAR RESERVA\n");
 				printf("\nNao foi possivel cancelar. Verifique o CPF.\n");
 				system("pause");
 			}
@@ -493,7 +518,108 @@ void fcancreserva()
 		{
 			system("cls");
 			fmostrarmapa();
+			printf("\n| CANCELAR RESERVA\n");
 			printf("\nO quarto nao esta reservado!\n\n");
 			system("pause");
 		}
+}
+
+void fadmin()
+{
+	int andar, apto;
+	int op2; 
+	float taxaO, taxaR;
+	
+	do{
+		system("cls");
+		printf("\n| MODO ADMINISTRADOR\n");
+		printf("\n[1] Taxa de ocupacao\n");
+		printf("[2] Taxa de reserva\n");
+		printf("[3] Situacao do apartamento\n");
+
+		printf("-----------------------\n");
+		printf("Digite uma opcao: ");
+		scanf("%d", &op2);
+		printf("\n");
+		fclear();
+		
+		switch(op2){
+			case 1:
+				//taxa de ocupacao
+				ocupados = 0;
+				
+				//conta os quartos ocupados
+				for(i = 0; i < 20; i++)
+				{
+				    for(j = 0; j < 14; j++)
+				    {
+				        if(mat[i][j].status == 'O')
+				        {
+    				        ocupados++;
+        				}
+    				}
+				}
+				
+				taxaO = (ocupados*100.0)/280;
+				printf("\nA taxa de ocupacao atual do hotel e %.2f%%", taxaO);
+				break;
+			case 2:
+				 //taxa de reserva
+				 reservados = 0;
+				 
+				 //conta os quartos reservados
+				 for(i = 0; i < 20; i++)
+				 {
+				 	for(j = 0; j < 14; j++)
+				 	{
+				 		if(mat[i][j].status == 'R')
+				 		{
+				 			reservados++;
+				 		}
+				 	}
+				 }
+				 
+				 taxaR = (reservados*100.0)/280;
+				 printf("\nA taxa de reservas atual do hotel e %.2f%%", taxaR);
+				 break;
+			case 3:
+				//situacao do apto
+				printf("Digite o andar e o apartamento: ");
+				scanf("%d %d", &andar, &apto);
+				printf("\n");
+				
+				
+				if(mat[andar-1][apto-1].status == 'O')
+				{
+					printf("Quarto ocupado. Informacoes do hospede:");
+				
+					printf("\n\nNome: %s", mat[andar-1][apto-1].hospede.nome);
+					printf("\nCPF: %s", mat[andar-1][apto-1].hospede.cpf);
+					printf("\nTelefone: %s", mat[andar-1][apto-1].hospede.tel);
+					printf("\nEmail: %s", mat[andar-1][apto-1].hospede.email);
+					printf("\nEndereco: %s", mat[andar-1][apto-1].hospede.endereco.ender);
+					printf("\nMunicipio: %s", mat[andar-1][apto-1].hospede.endereco.munic);
+					printf("\nEstado: %s", mat[andar-1][apto-1].hospede.endereco.estado);
+					printf("\nCEP: %s\n", mat[andar-1][apto-1].hospede.endereco.cep);
+					printf("-----------------------------------------\n");
+					system("pause");
+				}
+				if(mat[andar-1][apto-1].status == 'R')
+				{
+					printf("Quarto reservado. Informacoes do hospede:");
+					
+					printf("\n\nCPF: %s\n", mat[andar-1][apto-1].hospede.cpf);
+					printf("-------------------------------------------\n");
+					system("pause");
+				}
+				if(mat[andar-1][apto-1].status == '.')
+				{
+					printf("O quarto nao esta reservado ou ocupado.\n");
+					printf("----------------------------------------\n");
+					system("pause");
+				}
+				break;
+		}
+
+	}while(1);
 }
