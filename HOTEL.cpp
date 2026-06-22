@@ -68,7 +68,7 @@ int main()
 		printf("[2] Fazer check-in\n");
 		printf("[3] Fazer check-out\n");
 		printf("[4] Alterar reserva\n");
-		printf("[5] Modo administrador (Situacao do apartamento, taxas de reserva e ocupacao)\n");
+		printf("[5] Modo administrador (situacao do apartamento, taxas de reserva e ocupacao)\n");
 		printf("[0] Sair\n");
 
 		printf("-----------------------\n");
@@ -654,8 +654,8 @@ void fadmin()
 				
 				fcriarmapa();
 				
-				printf("\nSistema resetado com sucesso! Todos os quartos e dados foram zerados.\n");
-				printf("------------------------------------------------------------------\n");
+				printf("Sistema resetado com sucesso!\n");
+				printf("----------------------------------------\n");
 				system("pause");
 				
 				return;
