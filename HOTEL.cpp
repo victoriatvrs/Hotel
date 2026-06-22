@@ -21,7 +21,7 @@ void fmostrarmapa();
 void freserva();
 void fcheckin();
 void fcheckout();
-void fcancreserva();
+void faltreserva();
 void fadmin();
 void fclear();
 
@@ -67,7 +67,7 @@ int main()
 		printf("\n[1] Fazer reserva\n");
 		printf("[2] Fazer check-in\n");
 		printf("[3] Fazer check-out\n");
-		printf("[4] Cancelar reserva\n");
+		printf("[4] Alterar reserva\n");
 		printf("[5] Modo administrador\n");
 		printf("[0] Sair\n");
 
@@ -87,7 +87,7 @@ int main()
 				fcheckout();
 				break;
 			case 4:
-				fcancreserva();
+				faltreserva();
 				break;
 			case 5:
 				fadmin();
@@ -470,10 +470,11 @@ void fcheckout()
 	}
 }
 
-void fcancreserva()
+void faltreserva()
 {
-	int andar, apto;
+	int andar, apto, andar2, apto2;
 	char checagem[12];
+	int op;
 	
 		// pedir coordenadas
 		printf("\nDigite o numero do andar e apartamento: ");
@@ -500,17 +501,38 @@ void fcancreserva()
 			{
 				system("cls");
 				fmostrarmapa();
-				printf("\n| CANCELAR RESERVA\n");
-				printf("\nReserva cancelada.\n\n");
-				mat[andar-1][apto-1].status = '.';
+				printf("\n| ALTERAR RESERVA\n");
+				printf("\nSelecione uma opcao:\n");
+				printf("[1] Cancelar\n");
+				printf("[2] Alterar\n\n");
+				scanf("%d", &op);
+				if(op == 1){
+						printf("\nReserva cancelada.\n\n");
+						mat[andar-1][apto-1].status = '.';
+				}
+				else{
+						printf("\nDigite o novo numero do andar e apartamento: ");
+						scanf("%d %d", &andar2, &apto2);
+						if(mat[andar2-1][apto2-1].status == '.')
+						{
+							printf("\nMudanca de reserva confirmada.\n\n");
+							mat[andar-1][apto-1].status = '.';
+							mat[andar2-1][apto2-1].status = 'R';
+							strcpy(mat[andar2-1][apto2-1].hospede.cpf, mat[andar-1][apto-1].hospede.cpf);
+						}
+						else
+						{
+							printf("\nQuarto ja reservado ou ocupado!\n\n");
+						}
+				}
 				system("pause");
 			}
 			else
 			{
 				system("cls");
 				fmostrarmapa();
-				printf("\n| CANCELAR RESERVA\n");
-				printf("\nNao foi possivel cancelar. Verifique o CPF.\n");
+				printf("\n| ALTERAR RESERVA\n");
+				printf("\nNao foi possivel alterar. Verifique o CPF.\n");
 				system("pause");
 			}
 		}
@@ -518,7 +540,7 @@ void fcancreserva()
 		{
 			system("cls");
 			fmostrarmapa();
-			printf("\n| CANCELAR RESERVA\n");
+			printf("\n| ALTERAR RESERVA\n");
 			printf("\nO quarto nao esta reservado!\n\n");
 			system("pause");
 		}
