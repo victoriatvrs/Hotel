@@ -68,7 +68,7 @@ int main()
 		printf("[2] Fazer check-in\n");
 		printf("[3] Fazer check-out\n");
 		printf("[4] Alterar reserva\n");
-		printf("[5] Modo administrador\n");
+		printf("[5] Modo administrador (Situacao do apartamento, taxas de reserva e ocupacao)\n");
 		printf("[0] Sair\n");
 
 		printf("-----------------------\n");
@@ -276,7 +276,7 @@ void fcheckin()
 		{
 			printf("\nCadastro invalido!\n");
 			printf("------------------------------------------------\n");
-			printf("Gostaria de fazer check-in em um quarto vazio?\n");
+			printf("Gostaria de fazer check-in em outro apartamento?\n");
 			printf("[1] Sim\n");
 			printf("[2] Nao\n");
 			printf("-------------------\n");
