@@ -1,13 +1,13 @@
-//HSV-Ativ04 
-//30/05/2026
+//HSV-*****************
+//22/06/2026
 //Hellen Araujo da Silva
 //Samira Soares Carvalho 
 //Victoria Spina Tavares
 /*Um hotel possui 20 andares com 14 apartamentos por andar.
-Conforme os hospedes vï¿½o chegando, eles escolhem o apartamento desejado. 
-Se estiver livre, o apartamento ï¿½ alocado e o hospede faz o registro. 
+Conforme os hospedes vao chegando, eles escolhem o apartamento desejado. 
+Se estiver livre, o apartamento e alocado e o hospede faz o registro. 
 Ao deixar o hotel, o hospede faz o check-out e libera o apartamento. 
-O gerente tambï¿½m precisa saber quais apartamentos estï¿½o livres e a taxa de ocupaï¿½ï¿½o do hotel.
+O gerente tambï¿½m precisa saber quais apartamentos estï¿½o livres e a taxa de ocupacao do hotel.
 */
 
 #include <stdio.h>
@@ -31,17 +31,17 @@ void fclear();
 typedef struct stendereco{
 	char ender[40];
 	char munic[20];
-	char estado[3];
-	char cep[10];
+	char estado[20];
+	char cep[15];
 }stendereco;
 
 //dados gerais do hospede
 typedef struct stdados{
-	char cpf[12];
+	char cpf[20];
 	char nome[50];
 	struct stendereco endereco;
-	char tel[15];
-	char email[30]; 
+	char tel[20];
+	char email[40]; 
 }stdados;
 
 typedef struct sthotel{
@@ -68,7 +68,7 @@ int main()
 		printf("[2] Fazer check-in\n");
 		printf("[3] Fazer check-out\n");
 		printf("[4] Alterar reserva\n");
-		printf("[5] Modo administrador (Situacao do apartamento, taxas de reserva e ocupacao)\n");
+		printf("[5] Modo administrador (situacao do apartamento, taxas de reserva e ocupacao)\n");
 		printf("[0] Sair\n");
 
 		printf("-----------------------\n");
@@ -200,7 +200,7 @@ void fcheckin()
 {
 	int reserva, vazio;
 	int andar, apto;
-	char checagem[12]; //apenas para checar se o cpf bate com a reserva
+	char checagem[20]; //apenas para checar se o cpf bate com a reserva
 	
 	system("cls");
 	fmostrarmapa();
@@ -232,7 +232,7 @@ void fcheckin()
 		}
 		
 		printf("\nDigite seu cpf: ");
-		scanf("%11s", checagem);
+		scanf("%19s", checagem);
 		fclear();
 		
 		//checa se o cpf bate com o da reserva
@@ -243,28 +243,28 @@ void fcheckin()
 			printf("\nCheck-in confirmado! Prossiga com seus dados.\n");
 			
 			printf("\nNome: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.nome);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.nome, 50, stdin);
+			mat[andar-1][apto-1].hospede.nome[strcspn(mat[andar-1][apto-1].hospede.nome, "\n")] = '\0';
 			
 			printf("\nTelefone: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.tel);
-			fclear();
-			
+			fgets(mat[andar-1][apto-1].hospede.tel, 20, stdin);
+			mat[andar-1][apto-1].hospede.tel[strcspn(mat[andar-1][apto-1].hospede.tel, "\n")] = '\0';
+					
 			printf("\nEmail: ");
 			scanf("%s", mat[andar-1][apto-1].hospede.email);
 			fclear();
 			
 			printf("\nEndereco: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.endereco.ender);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.endereco.ender, 40, stdin);
+			mat[andar-1][apto-1].hospede.endereco.ender[strcspn(mat[andar-1][apto-1].hospede.endereco.ender, "\n")] = '\0';
 			
 			printf("\nMunicipio: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.endereco.munic);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.endereco.munic, 20, stdin);
+			mat[andar-1][apto-1].hospede.endereco.munic[strcspn(mat[andar-1][apto-1].hospede.endereco.munic, "\n")] = '\0';
 			
 			printf("\nEstado: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.endereco.estado);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.endereco.estado, 20, stdin);
+			mat[andar-1][apto-1].hospede.endereco.estado[strcspn(mat[andar-1][apto-1].hospede.endereco.estado, "\n")] = '\0';
 			
 			printf("\nCEP: ");
 			scanf("%s", mat[andar-1][apto-1].hospede.endereco.cep);
@@ -313,32 +313,32 @@ void fcheckin()
 					printf("\n-------------------------");
 					
 					printf("\nNome: ");
-					scanf("%s", mat[andar-1][apto-1].hospede.nome);
-					fclear();
+					fgets(mat[andar-1][apto-1].hospede.nome, 50, stdin);
+					mat[andar-1][apto-1].hospede.nome[strcspn(mat[andar-1][apto-1].hospede.nome, "\n")] = '\0';
 					
 					printf("\nCPF: ");
 					scanf("%s", mat[andar-1][apto-1].hospede.cpf);
 					fclear();
 					
 					printf("\nTelefone: ");
-					scanf("%s", mat[andar-1][apto-1].hospede.tel);
-					fclear();
+					fgets(mat[andar-1][apto-1].hospede.tel, 20, stdin);
+					mat[andar-1][apto-1].hospede.tel[strcspn(mat[andar-1][apto-1].hospede.tel, "\n")] = '\0';
 					
 					printf("\nEmail: ");
 					scanf("%s", mat[andar-1][apto-1].hospede.email);
 					fclear();
 					
 					printf("\nEndereco: ");
-					scanf("%s", mat[andar-1][apto-1].hospede.endereco.ender);
-					fclear();
+					fgets(mat[andar-1][apto-1].hospede.endereco.ender, 40, stdin);
+					mat[andar-1][apto-1].hospede.endereco.ender[strcspn(mat[andar-1][apto-1].hospede.endereco.ender, "\n")] = '\0';
 				
 					printf("\nMunicipio: ");
-					scanf("%s", mat[andar-1][apto-1].hospede.endereco.munic);
-					fclear();
+					fgets(mat[andar-1][apto-1].hospede.endereco.munic, 20, stdin);
+					mat[andar-1][apto-1].hospede.endereco.munic[strcspn(mat[andar-1][apto-1].hospede.endereco.munic, "\n")] = '\0';
 					
 					printf("\nEstado: ");
-					scanf("%s", mat[andar-1][apto-1].hospede.endereco.estado);
-					fclear();
+					fgets(mat[andar-1][apto-1].hospede.endereco.estado, 20, stdin);
+					mat[andar-1][apto-1].hospede.endereco.estado[strcspn(mat[andar-1][apto-1].hospede.endereco.estado, "\n")] = '\0';
 				
 					printf("\nCEP: ");
 					scanf("%s", mat[andar-1][apto-1].hospede.endereco.cep);
@@ -380,32 +380,32 @@ void fcheckin()
 			printf("\nProssiga com seus dados.\n");
 			
 			printf("\nNome: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.nome);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.nome, 50, stdin);
+			mat[andar-1][apto-1].hospede.nome[strcspn(mat[andar-1][apto-1].hospede.nome, "\n")] = '\0';
 			
 			printf("\nCPF: ");
 			scanf("%s", mat[andar-1][apto-1].hospede.cpf);
 			fclear();
 			
 			printf("\nTelefone: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.tel);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.tel, 20, stdin);
+			mat[andar-1][apto-1].hospede.tel[strcspn(mat[andar-1][apto-1].hospede.tel, "\n")] = '\0';
 			
 			printf("\nEmail: ");
 			scanf("%s", mat[andar-1][apto-1].hospede.email);
 			fclear();
 			
 			printf("\nEndereco: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.endereco.ender);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.endereco.ender, 40, stdin);
+			mat[andar-1][apto-1].hospede.endereco.ender[strcspn(mat[andar-1][apto-1].hospede.endereco.ender, "\n")] = '\0';
 			
 			printf("\nMunicipio: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.endereco.munic);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.endereco.munic, 20, stdin);
+			mat[andar-1][apto-1].hospede.endereco.munic[strcspn(mat[andar-1][apto-1].hospede.endereco.munic, "\n")] = '\0';
 			
 			printf("\nEstado: ");
-			scanf("%s", mat[andar-1][apto-1].hospede.endereco.estado);
-			fclear();
+			fgets(mat[andar-1][apto-1].hospede.endereco.estado, 20, stdin);
+			mat[andar-1][apto-1].hospede.endereco.estado[strcspn(mat[andar-1][apto-1].hospede.endereco.estado, "\n")] = '\0';
 			
 			printf("\nCEP: ");
 			scanf("%s", mat[andar-1][apto-1].hospede.endereco.cep);
@@ -419,7 +419,7 @@ void fcheckin()
 void fcheckout()
 {
 	int andar, apto;
-	char checagem[12];
+	char checagem[20];
 	
 	system("cls");
 	fmostrarmapa();
@@ -440,7 +440,7 @@ void fcheckout()
 	if(mat[andar-1][apto-1].status == 'O')
 		{
 			printf("Digite seu CPF para confirmar: ");
-			scanf(" %11s", checagem);
+			scanf(" %19s", checagem);
 			printf("\n");
 		
 			if(strcmp(checagem, mat[andar-1][apto-1].hospede.cpf) == 0)
@@ -473,7 +473,7 @@ void fcheckout()
 void faltreserva()
 {
 	int andar, apto, andar2, apto2;
-	char checagem[12];
+	char checagem[20];
 	int op;
 	
 		// pedir coordenadas
@@ -493,7 +493,7 @@ void faltreserva()
 		if(mat[andar-1][apto-1].status == 'R')
 		{
 			printf("Digite seu CPF para confirmar: ");
-			scanf(" %11s", checagem);
+			scanf(" %19s", checagem);
 			fclear();
 			printf("\n");
 		
@@ -524,7 +524,7 @@ void faltreserva()
 						{
 							printf("\nQuarto ja reservado ou ocupado!\n\n");
 						}
-				}
+		 	}
 				system("pause");
 			}
 			else
@@ -558,6 +558,8 @@ void fadmin()
 		printf("\n[1] Taxa de ocupacao\n");
 		printf("[2] Taxa de reserva\n");
 		printf("[3] Situacao do apartamento\n");
+		printf("[4] Limpar o sistema\n");
+		printf("[5] Retornar ao menu\n");
 
 		printf("-----------------------\n");
 		printf("Digite uma opcao: ");
@@ -583,8 +585,10 @@ void fadmin()
 				}
 				
 				taxaO = (ocupados*100.0)/280;
-				printf("\nA taxa de ocupacao atual do hotel e %.2f%%", taxaO);
+				printf("\nA taxa de ocupacao atual do hotel e de %.2f%%\n\n", taxaO);
+				system("pause");
 				break;
+				
 			case 2:
 				 //taxa de reserva
 				 reservados = 0;
@@ -602,8 +606,10 @@ void fadmin()
 				 }
 				 
 				 taxaR = (reservados*100.0)/280;
-				 printf("\nA taxa de reservas atual do hotel e %.2f%%", taxaR);
+				 printf("\nA taxa de reservas atual do hotel e de %.2f%%\n\n", taxaR);
+				 system("pause");
 				 break;
+				
 			case 3:
 				//situacao do apto
 				printf("Digite o andar e o apartamento: ");
@@ -641,7 +647,24 @@ void fadmin()
 					system("pause");
 				}
 				break;
+				
+			case 4:
+				//zera todos os dados da matriz na memória 
+				memset(mat, 0, sizeof(mat));
+				
+				fcriarmapa();
+				
+				printf("Sistema resetado com sucesso!\n");
+				printf("----------------------------------------\n");
+				system("pause");
+				
+				return;
+				break;
+				
+			case 5:
+				return;
+				break;
 		}
 
-	}while(1);
+	}while(op2 != 5);
 }
