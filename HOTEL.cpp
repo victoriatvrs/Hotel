@@ -236,8 +236,7 @@ void fcheckin()
 		fclear();
 		
 		//checa se o cpf bate com o da reserva
-		if(strcmp(checagem, mat[andar-1][apto-1].hospede.cpf) == 0) 
-		//TA ACEITANDO CHECK IN DUPLO E CPF PASSA
+		if(strcmp(checagem, mat[andar-1][apto-1].hospede.cpf) == 0 && mat[andar-1][apto-1].status != 'O')
 		{
 			printf("-----------------------------------------------");
 			printf("\nCheck-in confirmado! Prossiga com seus dados.\n");
@@ -447,9 +446,9 @@ void fcheckout()
 			{
 				fclear();
 				system("cls");
-				printf("\n| CHECK-OUT\n");
 				mat[andar-1][apto-1].status = '.';
 				fmostrarmapa();
+				printf("\n| CHECK-OUT\n");
 				printf("\nQuarto liberado!\n");
 				printf("----------------\n");
 				system("pause");
@@ -649,7 +648,7 @@ void fadmin()
 				break;
 				
 			case 4:
-				//zera todos os dados da matriz na memória 
+				//zera todos os dados da matriz na memï¿½ria 
 				memset(mat, 0, sizeof(mat));
 				
 				fcriarmapa();
