@@ -558,6 +558,7 @@ void fadmin()
 		printf("\n[1] Taxa de ocupacao\n");
 		printf("[2] Taxa de reserva\n");
 		printf("[3] Situacao do apartamento\n");
+		printf("[4] Retornar ao menu\n");
 
 		printf("-----------------------\n");
 		printf("Digite uma opcao: ");
@@ -583,8 +584,10 @@ void fadmin()
 				}
 				
 				taxaO = (ocupados*100.0)/280;
-				printf("\nA taxa de ocupacao atual do hotel e %.2f%%", taxaO);
+				printf("\nA taxa de ocupacao atual do hotel e %.2f%%\n\n", taxaO);
+				system("pause");
 				break;
+				
 			case 2:
 				 //taxa de reserva
 				 reservados = 0;
@@ -602,8 +605,10 @@ void fadmin()
 				 }
 				 
 				 taxaR = (reservados*100.0)/280;
-				 printf("\nA taxa de reservas atual do hotel e %.2f%%", taxaR);
+				 printf("\nA taxa de reservas atual do hotel e %.2f%%\n\n", taxaR);
+				 system("pause");
 				 break;
+				
 			case 3:
 				//situacao do apto
 				printf("Digite o andar e o apartamento: ");
@@ -641,7 +646,11 @@ void fadmin()
 					system("pause");
 				}
 				break;
+				
+			case 4:
+				return;
+				break;
 		}
 
-	}while(1);
+	}while(op2 != 4);
 }
