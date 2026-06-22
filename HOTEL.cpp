@@ -1,13 +1,13 @@
-//HSV-Ativ04 
-//30/05/2026
+//HSV-*****************
+//22/06/2026
 //Hellen Araujo da Silva
 //Samira Soares Carvalho 
 //Victoria Spina Tavares
 /*Um hotel possui 20 andares com 14 apartamentos por andar.
-Conforme os hospedes vï¿½o chegando, eles escolhem o apartamento desejado. 
-Se estiver livre, o apartamento ï¿½ alocado e o hospede faz o registro. 
+Conforme os hospedes vao chegando, eles escolhem o apartamento desejado. 
+Se estiver livre, o apartamento e alocado e o hospede faz o registro. 
 Ao deixar o hotel, o hospede faz o check-out e libera o apartamento. 
-O gerente tambï¿½m precisa saber quais apartamentos estï¿½o livres e a taxa de ocupaï¿½ï¿½o do hotel.
+O gerente tambï¿½m precisa saber quais apartamentos estï¿½o livres e a taxa de ocupacao do hotel.
 */
 
 #include <stdio.h>
@@ -558,7 +558,8 @@ void fadmin()
 		printf("\n[1] Taxa de ocupacao\n");
 		printf("[2] Taxa de reserva\n");
 		printf("[3] Situacao do apartamento\n");
-		printf("[4] Retornar ao menu\n");
+		printf("[4] Limpar o sistema\n");
+		printf("[5] Retornar ao menu\n");
 
 		printf("-----------------------\n");
 		printf("Digite uma opcao: ");
@@ -648,9 +649,22 @@ void fadmin()
 				break;
 				
 			case 4:
+				//zera todos os dados da matriz na memória 
+				memset(mat, 0, sizeof(mat));
+				
+				fcriarmapa();
+				
+				printf("\nSistema resetado com sucesso! Todos os quartos e dados foram zerados.\n");
+				printf("------------------------------------------------------------------\n");
+				system("pause");
+				
+				return;
+				break;
+				
+			case 5:
 				return;
 				break;
 		}
 
-	}while(op2 != 4);
+	}while(op2 != 5);
 }
