@@ -502,8 +502,8 @@ void faltreserva()
 				fmostrarmapa();
 				printf("\n| ALTERAR RESERVA\n");
 				printf("\nSelecione uma opcao:\n");
-				printf("[1] Cancelar\n");
-				printf("[2] Alterar\n\n");
+				printf("[1] Cancelar a reserva\n");
+				printf("[2] Alterar a reserva\n\n");
 				scanf("%d", &op);
 				if(op == 1){
 						printf("\nReserva cancelada.\n\n");
@@ -648,7 +648,7 @@ void fadmin()
 				break;
 				
 			case 4:
-				//zera todos os dados da matriz na mem�ria 
+				//zera todos os dados da matriz na memoria 
 				memset(mat, 0, sizeof(mat));
 				
 				fcriarmapa();
