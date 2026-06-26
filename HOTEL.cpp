@@ -1,4 +1,4 @@
-//HSV-*****************
+//HSV-Hotel-Ativ06
 //22/06/2026
 //Hellen Araujo da Silva
 //Samira Soares Carvalho 
@@ -7,7 +7,7 @@
 Conforme os hospedes vao chegando, eles escolhem o apartamento desejado. 
 Se estiver livre, o apartamento e alocado e o hospede faz o registro. 
 Ao deixar o hotel, o hospede faz o check-out e libera o apartamento. 
-O gerente tamb�m precisa saber quais apartamentos est�o livres e a taxa de ocupacao do hotel.
+O gerente tambem precisa saber quais apartamentos estao livres e a taxa de ocupacao do hotel.
 */
 
 #include <stdio.h>
@@ -440,11 +440,11 @@ void fcheckout()
 		{
 			printf("Digite seu CPF para confirmar: ");
 			scanf(" %19s", checagem);
+			fclear();
 			printf("\n");
 		
 			if(strcmp(checagem, mat[andar-1][apto-1].hospede.cpf) == 0)
 			{
-				fclear();
 				system("cls");
 				mat[andar-1][apto-1].status = '.';
 				fmostrarmapa();
@@ -502,8 +502,8 @@ void faltreserva()
 				fmostrarmapa();
 				printf("\n| ALTERAR RESERVA\n");
 				printf("\nSelecione uma opcao:\n");
-				printf("[1] Cancelar\n");
-				printf("[2] Alterar\n\n");
+				printf("[1] Cancelar a reserva\n");
+				printf("[2] Alterar a reserva\n\n");
 				scanf("%d", &op);
 				if(op == 1){
 						printf("\nReserva cancelada.\n\n");
@@ -648,7 +648,7 @@ void fadmin()
 				break;
 				
 			case 4:
-				//zera todos os dados da matriz na mem�ria 
+				//zera todos os dados da matriz na memoria 
 				memset(mat, 0, sizeof(mat));
 				
 				fcriarmapa();
