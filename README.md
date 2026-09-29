@@ -9,7 +9,7 @@ Repositório dedicado ao desenvolvimento de um sistema de gerenciamento hoteleir
 - 🏢 **Estrutura:** Mapeamento em matriz para 280 apartamentos (20 andares x 14 quartos).
 - ⌨️ **Interação:** Sistema interativo via linha de comando (CLI).
 - 🛡️ **Estabilidade:** Tratamento rigoroso de buffer para validação de dados de entrada.
-- 👥 **Autora:** Victoria Spina Tavares
+- 👥 **Autores:** Victoria Spina Tavares, Hellen Araujo da Silva e Samira Soares Carvalho
 
 ---
 
